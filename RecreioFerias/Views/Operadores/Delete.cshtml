@@ -1,0 +1,52 @@
+﻿@model RecreioFerias.Models.Operador
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<div>
+    <h4>Operador</h4>
+
+    <hr />
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h4><i class="bi bi-trash"></i>Confirmar Exclusão</h4>
+            </div>
+            <div class="card-body">
+                <p>Tem certeza que deseja excluir esta Operador? </p>
+                <div class="row">
+
+                    <div class="col-1">
+                        <b>Operador: </b>
+                    </div>
+                    <div class="col-2">
+                        @Html.DisplayFor(model => model.Login)
+                    </div>
+                    <div class="col-2">
+                        <b>Situação: </b>
+                    </div>
+                    <div class="col-1">
+                        @((Model.Situacao) ? "Ativo" : "Inativo")
+                    </div>
+                </div>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="OperadorId" />
+                    <button class="btn btn-danger" value="Delete" type="submit">
+                        <i class="bi bi-trash" style="vertical-align: middle;"></i>&#32 Apagar
+
+                    </button>
+                    &#32&#32&#32&#32
+                    <a asp-action="Index" class="btn btn-outline-secondary small" style="color:darkgray">
+                        <i class="bi bi-arrow-left-square"></i>&#32 <b>Voltar</b>
+                    </a>
+    </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+﻿@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<RecreioFerias.Models.Turma>
+
+@{
+    ViewData["Title"] = "Cadastro - Tumra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Turmas</h2>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <a asp-action="Create" class="btn btn-success">
+                <i class="bi bi-file-earmark-plus" aria-hidden="true" style="font-size: 1.5rem;"></i>&#32 Turma
+            </a>
+        </div>
+        <div class="col-lg-6">
+            <form asp-action="Index" asp-controller="Turmas" method="post">
+                <label class="form-label">Pesquisar:</label>    
+                <input type="text" name="pesquisa" id="pesquisa" value="@ViewBag.filtro" />
+                <button class="btn btn-outline-secondary small" style="color:darkblue" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+                <button class="btn btn-outline-info small" style="color:blueviolet" onclick="limparInput()">
+                    <i class="bi bi-eraser"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div><br /></div>
+</div>
+<table class=" table table-condensed table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+               Cor da Turma:
+            </th>
+            
+            <th>
+               Faixa Etária:
+            </th>
+           
+
+            <th> 
+                Quantidade Total: 
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+          
+            <td>
+                    @Html.DisplayFor(modelItem => item.IdadeMinima) -  @Html.DisplayFor(modelItem => item.IdadeMaxima)
+            </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantidadeAlunos)
+                </td>
+            <td>
+                    <a asp-action="Details" asp-route-id="@item.TurmaId" class="btn btn-primary">
+                        <i class="bi bi-clipboard" style="vertical-align: middle;"></i>
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@item.TurmaId" class="btn btn-warning">
+                        <i class="bi bi-pencil" style="vertical-align: middle; border:1px; color:white;"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.TurmaId" class="btn btn-danger">
+                        <i class="bi bi-trash" style="vertical-align: middle;"></i>
+                    </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <div style="float: right">
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    </div>
+
+    <div class="justify-content-center">
+        @Html.PagedListPager(
+                 Model,
+                 page => Url.Action("Index", new { page, filtro = ViewBag.filtro }),
+                 new PagedListRenderOptions
+        {
+
+            LiElementClasses = new[] { "page-item" },
+            UlElementClasses = new[] { "pagination justify-content-center" }
+        }
+                 )
+    </div>
+</div>

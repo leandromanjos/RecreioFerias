@@ -1,0 +1,114 @@
+﻿@model RecreioFerias.Models.Operador
+
+@{
+    ViewData["Title"] = "Criar Operador";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Criar Operador</h1>
+<br />
+<hr />
+
+<div class="container">
+
+
+    <div class="card">
+        <div class="card-heading d-flex justify-content-between bg-success text-white">
+            <div class="info-esquerda"> <h5><i class="bi bi-file-earmark-plus"></i>Cadastrar novo Operador</h5></div>
+            <div class="info-direita"><b>*</b> Campos Obrigatórios</div>
+        </div>
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label><b>Login: </b></label>
+                    </div>
+                    <div class="col-md-3">
+                        <input asp-for="Login" class="form-control" />
+                        <span asp-validation-for="Login" class="text-danger"></span>
+                    </div>
+                    </div>
+                <br />
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label><b>Senha: </b></label>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-center">
+                        <input asp-for="Senha" class="form-control" id="senhaInput" />
+                        <span asp-validation-for="Senha" class="text-danger"></span>
+                        <button type="button" class="btn btn-outline-secondary ms-2" onclick="toggleSenha('senhaInput', 'senhaIcon')">
+                            <i class="bi bi-eye" id="senhaIcon"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <label><b>Comparar Senha: </b></label>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-center">
+                        <input asp-for="CompararSenha" class="form-control" id="compararSenhaInput" />
+                        <span asp-validation-for="CompararSenha" class="text-danger"></span>
+                        <button type="button" class="btn btn-outline-secondary ms-2" onclick="toggleSenha('compararSenhaInput', 'compararSenhaIcon')">
+                            <i class="bi bi-eye" id="compararSenhaIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+            <br />
+                <div class="row mb-3">
+                    
+                        <div class="col-md-2">
+                            <label><b>Situação do Operador: </b></label>
+                        </div>
+                        <div class="col-md-3">
+                            <select asp-for="Situacao" class="form-control">
+                                <option value="true">Ativo</option>
+                                <option value="false">Inativo</option>
+                            </select>
+                            
+                        </div>
+                    <span asp-validation-for="Situacao" class="text-danger"></span>
+                    </div>
+
+                   
+                </div>
+                
+            <div class="card-footer">
+                <div class="form-group">
+
+                    <button class="btn btn-primary" type="submit" value="Create">
+                        <i class="bi bi-arrow-up-square"></i>&#32 Salvar
+                    </button>
+                    &#32&#32&#32&#32
+                    <a asp-action="Index" class="btn btn-outline-secondary small" style="color:darkgray">
+                        <i class="bi bi-arrow-left-square"></i>&#32 <b>Voltar</b>
+                    </a>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script>
+        function toggleSenha(inputId, iconId) {
+            var senhaInput = document.getElementById(inputId);
+            var senhaIcon = document.getElementById(iconId);
+            if (senhaInput.type === "password") {
+                senhaInput.type = "text";
+                senhaIcon.classList.remove("bi-eye");
+                senhaIcon.classList.add("bi-eye-slash");
+            } else {
+                senhaInput.type = "password";
+                senhaIcon.classList.remove("bi-eye-slash");
+                senhaIcon.classList.add("bi-eye");
+            }
+        }
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

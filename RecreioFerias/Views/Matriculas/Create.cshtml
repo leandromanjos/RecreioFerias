@@ -1,0 +1,172 @@
+﻿@model RecreioFerias.Models.Matricula
+
+
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Matriculas</h1>
+<br />
+<hr />
+
+<div class="container">
+
+
+    <div class="card">
+        <div class="card-heading d-flex justify-content-between bg-success text-white">
+            <div class="info-esquerda"> <h5><i class="bi bi-file-earmark-plus"></i>Nova Matrícula</h5></div>
+            <div class="info-direita"><b>*</b> Campos Obrigatórios</div>
+        </div>
+        @if (ViewBag.MensagemErro != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.MensagemErro
+            </div>
+        }
+
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            
+            <div class="card-body">
+                <div class="row mb-3">
+
+                        <div class="col-md-3">
+                        <label><b>Nome do Aluno: </b></label>
+                        </div>
+                    <div class="col-md-3">
+                        <input asp-for="Aluno.Nome" value="@Model.Aluno.Nome" disabled class="form-control w-100" />
+                        <input type="hidden" asp-for="AlunoId" />
+                    </div>
+
+                    <div class="col-md-3">
+                        <label><b>Idade: </b></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label>@Model.Aluno.CalcularIdade(Model.Aluno.DataNascimento)</label>
+                    </div>
+                    </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label><b>Cor da Turma: </b></label>
+                    </div>
+                    <div class="col-md-3">
+                       
+                        <select asp-for="TurmaId" class="form-control" asp-items="ViewBag.TurmaDescricao"></select>
+                        <input type="hidden" asp-for="TurmaId" />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="col-sm"><b>Quantidade de Vagas:  </b></label>
+                    </div>
+                    <div class="col-md-1">
+
+                        <label id="vagasDisponiveis">@ViewBag.Vagas</label>
+
+                    </div>
+                    <div class="col-md-2">
+                        <label class="col-sm"><b>Faixa Etária: </b></label>
+                    </div>
+                    <div class="col-md-1">
+                        <label id="faixaEtaria">@ViewBag.FaixaEtaria</label>
+
+
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    
+                   
+            </div>
+
+
+
+            </div>
+
+        
+        <div class="card-footer">
+            <div class="form-group">
+
+                <button class="btn btn-primary" type="submit" value="Create">
+                    <i class="bi bi-arrow-up-square"></i>&#32 Salvar
+                </button>
+                &#32&#32&#32&#32
+                <a asp-action="Index" class="btn btn-outline-secondary small" style="color:darkgray">
+                    <i class="bi bi-arrow-left-square"></i>&#32 <b>Voltar</b>
+                </a>
+
+            </div>
+        </div>
+        
+        </form>
+      
+    </div>
+</div>
+
+
+
+@* @section Scripts {
+    
+    <script>
+        document.getElementById("TurmaId").addEventListener("change", function () {
+            var turmaId = this.value;
+            if (turmaId) {
+                fetch(`/Matriculas/GetVagasDisponiveis?turmaId=${turmaId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.sucesso) {
+                            document.getElementById("vagasDisponiveis").innerText = data.vagas;
+                        } else {
+                            alert(data.mensagem);
+                        }
+                    })
+                    .catch(error => console.error('Erro ao buscar vagas:', error));
+            }
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+ *@
+ 
+@section Scripts {
+    <script>
+        document.getElementById("TurmaId").addEventListener("change", function () {
+            var turmaId = this.value;
+            if (turmaId) {
+                // Atualizar vagas disponíveis
+                fetch(`/Matriculas/GetVagasDisponiveis?turmaId=${turmaId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.sucesso) {
+                            document.getElementById("vagasDisponiveis").innerText = data.vagas;
+                        } else {
+                            alert(data.mensagem);
+                        }
+                    })
+                    .catch(error => console.error('Erro ao buscar vagas:', error));
+
+                // Atualizar faixa etária
+                fetch(`/Matriculas/GetFaixaEtaria?turmaId=${turmaId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.sucesso) {
+                            document.getElementById("faixaEtaria").innerText = data.faixaEtaria;
+                        } else {
+                            alert(data.mensagem);
+                        }
+                    })
+                    .catch(error => console.error('Erro ao buscar faixa etária:', error));
+            }
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+  
+

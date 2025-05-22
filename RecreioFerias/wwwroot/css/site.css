@@ -1,0 +1,125 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+.card-azul {
+    background-color: #4f9ef0; /* Azul */
+    color: white;
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 15px;
+}
+
+.card-verde{
+    background-color: #5ff181; /* Verde */
+    color: white;
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 15px;
+}
+
+
+.card-amarelo {
+    background-color: #e4e50d; /* amarelo */
+    color: white;
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 15px;
+}
+.card-laranja {
+    background-color: #ff6a00; /* laranja */
+    color: white;
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 15px;
+}
+.card-rosa {
+    background-color: #fd7cf4; /* rosa */
+    color: white;
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 15px;
+}
+.card-roxo {
+    background-color: #cd5ff1; /* roxo */
+    color: white;
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 15px;
+}
+
+.button-roxo {
+    background-color: #994ab3;
+    color: white;
+}
+.button-roxo:hover {
+        background-color: #834199; /* Cor quando o mouse está sobre o botão */
+        color: white;
+}
+
+
+.button-amarelo {
+    background-color: #d1d20f;
+    color: white;
+}
+
+    .button-amarelo:hover {
+        background-color: #babb12; /* Cor quando o mouse está sobre o botão */
+        color: white;
+
+}
+
+.button-laranja {
+    background-color: #d85a00;
+    color: white;
+}
+
+.button-laranja:hover {
+        background-color: #bb4f02; /* Cor quando o mouse está sobre o botão */
+        color: white;
+    }
+.button-verde {
+    background-color: #51cf6e;
+    color: white;
+}
+
+    .button-verde:hover {
+        background-color: #4dba66; /* Cor quando o mouse está sobre o botão */
+        color: white;
+    }
+.button-rosa {
+    background-color: #d66ccf;
+    color: white;
+}
+
+    .button-rosa:hover {
+        background-color: #b05aaa; /* Cor quando o mouse está sobre o botão */
+        color: white;
+    }
+
+
+.toolbar-item:hover {
+    background-color: #87a2ef; /* Cor de fundo em destaque */
+   color: white; /* Cor do texto em destaque */
+}
+.navbar-nav .nav-link {
+    color: black !important; /* Cor padrão para os links */
+}
+
+    .navbar-nav .nav-link:hover {
+        color: black !important; /* Cor ao passar o mouse */
+    }

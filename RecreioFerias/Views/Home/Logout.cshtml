@@ -1,0 +1,15 @@
+﻿@page
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@model RecreioFerias.Models.Operador
+
+@{
+    ViewData["Title"] = "Logout";
+}
+
+<div class="text-center">
+    <h1>Você saiu do sistema</h1>
+    <p>Obrigado por usar o sistema. Clique abaixo para fazer login novamente.</p>
+    <a class="btn btn-primary" asp-page="/Home/Login">Login</a>
+</div>
+
