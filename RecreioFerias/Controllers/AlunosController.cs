@@ -35,7 +35,8 @@ namespace RecreioFerias.Controllers
             ViewBag.filtro = pesquisa;
             var consulta = from s in _context.Aluno select s;
 
-            
+            var alunosMatriculados = _context.Matricula.Select(m => m.AlunoId).ToList();
+            ViewBag.AlunosMatriculados = alunosMatriculados;
 
             if (!string.IsNullOrWhiteSpace(pesquisa))
             {

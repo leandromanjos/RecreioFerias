@@ -437,6 +437,8 @@ namespace RecreioFerias.Controllers
 
             ViewBag.filtro = pesquisa;
 
+            var alunosMatriculados = _context.Matricula.Select(m => m.AlunoId);
+
             if (!string.IsNullOrEmpty(pesquisa))
             {
 
@@ -456,7 +458,10 @@ namespace RecreioFerias.Controllers
                 int pageNu = (page ?? 1);
                 return View(alunos.ToPagedList(pageNu, pag));
             }
+
+            //filtra alunos matriculados.
             var consulta = await _context.Aluno
+            .Where(a => !alunosMatriculados.Contains(a.AlunoId))
             .OrderByDescending(a => a.AlunoId)
             .ToListAsync();
 

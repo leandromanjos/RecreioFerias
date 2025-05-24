@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Cadastro de Alunos";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var alunosMatriculados = ViewBag.AlunosMatriculados as List<int>;
 }
 
 <h2>Cadastro de Alunos</h2>
@@ -113,6 +114,7 @@
                     {
                         <label>Não</label>
                     }
+
                 </td>
                 <td>
                    
@@ -122,9 +124,15 @@
                     <a asp-action="Delete" asp-route-id="@item.AlunoId" class="btn btn-danger">
                         <i class="bi bi-trash" style="vertical-align: middle;"></i>
                     </a>
-                    <a asp-controller="Matriculas" asp-action="Create" asp-route-id="@item.AlunoId" class="btn btn-primary">
+                   @*  <a asp-controller="Matriculas" asp-action="Create" asp-route-id="@item.AlunoId" class="btn btn-primary">
+                        <i class="bi bi-emoji-laughing-fill" style="vertical-align: middle;"></i> Matricular
+                    </a> *@
+                    <a class="btn btn-primary @(alunosMatriculados.Contains(item.AlunoId) ? "disabled" : "")"
+                    @(alunosMatriculados.Contains(item.AlunoId) ? "tabindex='-1' aria-disabled='true'" : "")
+                       href="@(alunosMatriculados.Contains(item.AlunoId) ? "#" : Url.Action("Create", "Matriculas", new { id = item.AlunoId }))">
                         <i class="bi bi-emoji-laughing-fill" style="vertical-align: middle;"></i> Matricular
                     </a>
+
                 </td>
             </tr>
         }
